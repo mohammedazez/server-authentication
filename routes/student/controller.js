@@ -1,3 +1,7 @@
+// Import dotenv
+// Import jwt
+// import bcrypt
+
 // Import model
 const { Student } = require("../../models");
 
@@ -5,6 +9,7 @@ module.exports = {
   // Read by all
   getAllStudent: (req, res) => {
     Student.find()
+    // hilangkan _V di populate
       .populate("class")
       .then((result) => {
         res.status(200).json({
@@ -32,6 +37,7 @@ module.exports = {
   },
   // Create
   postStudent: async (req, res) => {
+    // Masukkan bcrypt salt dan hash di post 
     const students = await Student.create(req.body);
     try {
       res.json({
@@ -70,4 +76,6 @@ module.exports = {
       res.status(500).send(error);
     }
   },
+  // Buat login integrasi dengan bcrypt dan jwt
+  //  buat get student di class
 };

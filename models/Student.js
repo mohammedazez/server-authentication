@@ -6,6 +6,7 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Buat data string untuk email dan password
   class: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "class-room",
