@@ -25,7 +25,7 @@ module.exports = {
       });
   },
   // Read by id
-  getStudentById: async (req, res) => {
+  getStudentById: async (req, res) => { 
     const students = await Student.findById(req.params.id);
 
     try {
@@ -41,20 +41,26 @@ module.exports = {
   // Create
   postStudent: async (req, res) => {
     // Masukkan bcrypt salt dan hash di post 
+
+    // melakukan enksripsi pada passsworndya Sebanyak 10 karakter
     const salt = bcrypt.genSaltSync(10);
+
+    // Setelah itu passwordnya akan di hash
     const hash = bcrypt.hashSync(req.body.password, salt);
 
+    // Ambil objek student di  request body
     let student = {
       ...req.body,
+      // passwornya di ubah dengan hash lalu Tampilkan 
       password: hash
     }
-
     console.log(student);
-     student = await Student.create(student);
+    // Setelah itu akan membuat si studentnya
+    student = await Student.create(student);
     try {
       res.json({
         message: "Sukses menambahkan data student",
-        students,
+        student
       });
     } catch (error) {
       console.log(error);
@@ -97,7 +103,10 @@ module.exports = {
 
       // Jika student ada maka harus dibuatkan jwtnya
       if(student){
+        // Apakah password yang di hash dengan password yang diinput sesuai dengan compare untuk membandingkan password yang sudah di hash dengan passowrdnya diinput 
         const pass = bcrypt.compareSync(req.body.password, student.password)
+
+        // Jika passwordnya benar
         if(pass){
           const token = jwt.sign(student.toObject(), process.env.SECRET_KEY)
           // Jika berhasil dibuatkan token maka munculkan
@@ -106,9 +115,11 @@ module.exports = {
             // Menampilkan token
             token
           })
+          // Jika password tidak sesuai
         } else {
           res.json("password salah")
         }
+        // Jika password tidak sesuai
       } else {
         res.json("user tidak ditemukan")
       }

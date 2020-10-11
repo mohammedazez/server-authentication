@@ -26,7 +26,6 @@ module.exports = {
             // Jika token valid maka akan dieksekusi secara lanjut
             if(isTokenValid){
                 let {password, ...rest} = isTokenValid
-
                 req.body = rest
                 next()
             }
