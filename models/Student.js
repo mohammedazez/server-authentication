@@ -15,7 +15,7 @@ const StudentSchema = new mongoose.Schema({
 });
 
 // Buat nama databasenya
-const Student = mongoose.model("studentss", StudentSchema);
+const Student = mongoose.model("studentss jwt", StudentSchema);
 
 // Ekspor
 module.exports = Student;
