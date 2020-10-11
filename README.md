@@ -9,8 +9,4 @@ https://www.npmjs.com/package/bcrypt
 https://jwt.io/
 
 
-yarn add bcryptjs
-yarn add dotenv
-yarn add jsonwebtoken
-yarn add nodemon -D
-yarn add mongoose
+yarn add bcryptjs dotenv jsonwebtoken nodemon -D mongoose
